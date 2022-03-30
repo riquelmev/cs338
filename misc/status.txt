@@ -1,0 +1,3 @@
+Vicente Riquelme
+
+I plan to use Kali on my own M1 Mac for this class. I have it set up as well as UTM, and I am able to ping between them.
