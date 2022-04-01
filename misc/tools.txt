@@ -1,0 +1,31 @@
+Vicente Riquelme
+
+1. ifconfig | grep inet
+
+2. Ping 'host'
+
+3. nslookup '172.217.2.36'
+
+4. scp 'file1' 'user'@'ip'
+
+5. nc -z 'host' 'port'
+
+6. netstat -a | grep 'LISTEN'
+
+7. curl 'host' -o 'file'
+
+8. curl --head 'host'
+
+9. curl -v 'host
+
+
+Sources:
+1. https://stackoverflow.com/questions/8529181/which-terminal-command-to-get-just-ip-address-and-nothing-else
+2. https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ping
+3. https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup
+4. https://docs.oracle.com/cd/E26502_01/html/E29001/remotehowtoaccess-55154.html
+5. https://kapeli.com/cheat_sheets/Netcat.docset/Contents/Resources/Documents/index
+6. https://docs.rackspace.com/support/how-to/checking-listening-ports-with-netstat/
+7. https://curl.se/docs/httpscripting.html
+8.
+9. https://mkyong.com/web/curl-display-request-headers-and-response-headers/#:~:text=We%20can%20use%20curl%20%2Dv,headers%20in%20the%20cURL%20command.&text=The%20%3E%20lines%20are%20request%20headers%20.
