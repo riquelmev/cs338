@@ -1,0 +1,45 @@
+Vicente Riquelme
+
+=====DAYTIME=====
+1.
+(i.e. the frame number 3, the source IP address, the destination IP address, the protocol, and the "Info" for the frame).
+
+1 172.16.138.128 129.6.15.28 TCP SYN SEQ=0 Win=64240 Len=0
+2 129.6.15.28 172.16.138.128 TCP SYN,ACK SEQ=0 ACK=1 Win=64240 Len=0
+3 172.16.138.128 129.6.15.28 TCP ACK SEQ=1 ACK= 1 Win=64240 Len=0
+
+2. Port 32828. The client needs a port as well since there are many connections on the my computer and the server needs to know where to send the packets.
+
+3. 4 129.6.15.28 172.16.138.128 DAYTIME DAYTIME Response 
+ 
+4. Daytime: \n59673 22-04-04 02:14:19 50 0 0 568.3 UTC(NIST) * \n
+
+Modified Julian Day, Date, time, and whether daylights saving is occurring and if there is to be a leap second this year.
+
+https://tf.nist.gov/general/pdf/1046.pdf
+
+5.
+SYN stands for synchronization packet. The protocol uses this packet in the 3-way handshake to initiate a connection.
+
+6.
+ACK stands for acknowledgement. The protocol uses these packets to acknowlede that it has received a packet with a given sequence number.
+
+7.
+A FIN Packet is used to terminate a connection.
+
+8. We see that the server initiated the termination since frame that has the first FIN packet has a source IP that corresponds with the server.
+
+====HTTP=====
+
+1.  I see 3 connections as I see 3 different SYN pair-interactions and 3 different client ports being used.
+2. I see where the http index.html was requested on frame 4. I see the info contains the request GET /index.
+3. I can see where the jpg was requested on frame 8. I see that the info column contains the request GET jeff_square_head.jpg
+
+
+======Questions======
+1. Why are there multiple connections opened over a seemingly very simple connection 
+and request?
+
+2. What does the TCP keep-alive request mean. Is there an auto-shut off if no packet is received in a certain amount of time?
+
+3. Why is there a length field and a Len in the info as well? They seem to differ in size as well.
