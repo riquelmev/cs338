@@ -18,21 +18,20 @@ Modified Julian Day, Date, time, and whether daylights saving is occurring and i
 
 https://tf.nist.gov/general/pdf/1046.pdf
 
-5.
-SYN stands for synchronization packet. The protocol uses this packet in the 3-way handshake to initiate a connection.
+5. SYN stands for synchronization packet. The protocol uses this packet in the 3-way handshake to initiate a connection.
 
-6.
-ACK stands for acknowledgement. The protocol uses these packets to acknowlede that it has received a packet with a given sequence number.
+6. ACK stands for acknowledgement packet. The protocol uses these packets to acknowledge that it has received a packet with a given sequence number.
 
-7.
-A FIN Packet is used to terminate a connection.
+7. A FIN Packet is used to terminate a connection. Both client and server send a FIN packet.
 
 8. We see that the server initiated the termination since frame that has the first FIN packet has a source IP that corresponds with the server.
 
 ====HTTP=====
 
 1.  I see 3 connections as I see 3 different SYN pair-interactions and 3 different client ports being used.
+
 2. I see where the http index.html was requested on frame 4. I see the info contains the request GET /index.
+
 3. I can see where the jpg was requested on frame 8. I see that the info column contains the request GET jeff_square_head.jpg
 
 
