@@ -1,0 +1,100 @@
+Vicente Riquelme
+Seth Romanenko 
+
+
+====Diffie-Helman=====
+
+The shared secret for Alice and Bob using the Diffie-Helman is 7.
+
+We were able to figure this out using  A = g^X mod p, where the only unknown is X. Thus, by using the following crack() function, are able to solve for X. The same process is also repeated for Bob and we solve for Y too.
+
+def crack(value,g,mod):
+    for i in range(mod):
+      if ((g**i) % mod == value):
+        return i
+
+print("X = ", crack(57, 13, 59))
+print("Y = ", crack(44,13,59))
+
+print("Alice computes", (44**20)%59)
+print("Bob computes", (57**47)%59)
+
+The above code prints:
+X =  20
+Y =  47
+Alice computes 7
+Bob computes 7
+
+We know we are correct since they both end up with the same secret.
+
+Had these numbers been much larger, our crack function would take an extremely long time since we are brute forcing it and exponential computation is very time intensive. Even though the code to crack it is simple, we simple will not be able to brute force it in any reasonable span of time given that the numbers involved are sufficiently large.
+
+
+
+====RSA===
+For the RSA algorithm, Eve is able to find that the sent message is 
+“Hey Bob. It's even worse than we thought! Your pal, Alice. https://www.schneier.com/blog/archives/2022/04/airtags-are-used-for-stalking-far-more-than-previously-reported.html”
+
+Alice’s original message is in ASCII code, sent as integers. These numbers are encrypted using the RSA algorithm, where each character is encoded and sent as a single value. This is where this algorithm is insecure, even if we couldn't crack the encryption. Even if Bob had used sufficiently large numbers such that it was incredibly difficult to decrypt, each encrypted value still corresponds to a single letter, and thus we could use frequency analysis or other methods to decode it. Thus, to make it secure, we should have encoded multiple characters at a time.   
+
+To decrypt this message, we first  took Bob’s n value from the public key, and brute forced an approach to figure out potential pb’s and qb’s. This was done using our function, find_num.
+
+def find_num(target):
+	for i in range(target):
+		for j in range(target):
+			if(i * j == target):
+				print(i,j)
+
+Thus, find_num(5561) = 83 and  67.
+
+This is also where our algorithm would be useless if Bob had chosen larger prime numbers. It did not take very long to find 83 and 67 because they were so small. Had they been much much larger, our algorithm would not have run in a reasonable amount of time and we would have been unable to proceed. Our system's security relies on the fact than bob has chosen a large enough n, since n is computationally hard to factor.
+
+From this, we found the lcm of pb-1 and qb-1 were 82 and 66. Our LCM function looked like, 
+def lcm(x,y):
+  orig_x = x
+  orig_y = y
+  while True:
+    if x < y:
+      x = x + orig_x
+    elif y < x:
+      y = y + orig_y
+    else:
+      return x
+
+
+The LCM of 82 and 66 is 2706.
+
+Using this number, we were able to calculate the value for eb using the following function.
+
+def find_db(eb,mod):
+  for i in range(100000):
+    if ((eb*i) % mod == 1):
+      return i
+
+Thus, db was found to be 1249.
+
+To ensure this value was correct, we made sure that the GCD of eb and the lcm(pb-1,qb-1) was 1, which it was.
+
+Then, we decrypted each element and converted it to characters to reveal the plaintext message as x^eB mod nB gave us the unencrypted value. Since each character was encoded as a single value, we need to run the decryption on each value and string them together to reveal the message.
+
+def decrypt(list, db, nb):
+	decrypted = []
+	for i in range(len(list)):
+		decrypted.append((list[i]**db) % nb)
+	return decrypted
+
+def to_ASCII(list):
+  message = ""
+  for letter in list:
+	  message += chr(letter)
+  return message
+
+These two functions returned our unencrypted message “Hey Bob. It's even worse than we thought! Your pal, Alice. https://www.schneier.com/blog/archives/2022/04/airtags-are-used-for-stalking-far-more-than-previously-reported.html”
+
+
+
+
+
+
+
+
