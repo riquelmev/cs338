@@ -126,7 +126,12 @@ e1 98 b5 9a 70 1a 6b 20 47 d7 cc 81 fb 65 ca 26
 78 2e d6 c0 3b ab be ea ac 55 cb 38 38 70 ff 88
 3f e4 ea ea bc 53 f7
 
-Interpreted in 4 byte chunks.
+To get this encoding, I used the command,
+cat key.pub | cut -d " " -f2 | \
+base64 -d | hexdump -ve '/1 "%02x "' -e '2/8 "\n"'
+
+And the output was this plaintext hexadecimal.
+
 
 00 00 00 07 is the length of the following ASCII text.
 
@@ -134,11 +139,11 @@ Interpreted in 4 byte chunks.
 
 00 00 00 03 specifies the length of e. 
 
-01 00 01 is e, which is 65537.  
+01 00 01 is e, which is 65537 in decimal.  
 
-00 00 01 81 is length of the value, which in this case is 385.
+00 00 01 81 is length of the key, which in this case is 385.
 
-The rest of the bytes are the key modulus n, and are used to encrypt the message.
+The rest of the bytes are is the value n, which is used for the modulo part of the RSA encryption.
 
 This is exactly the same n as found in the private key. 
 
