@@ -1,0 +1,46 @@
+BRUTE-FORCE PASSWORD CRACKING
+Seth Romanenko
+Vicente Antonio Bobadilla Riquelme
+
+Part1
+Total Time: 0.28s User Time
+Number of Hashes Computed: 267,733 (all words once)
+Passwords cracked: 2805 (all passwords)
+Time per hash computed: 0.28 / 267733 =0.00000104581 seconds per hash
+Time per password cracked: 0.28/ 2805 = 0.00009982174 seconds per password
+Passwords cracked per number of hashes computed: 2805/ 267,733 = 0.0104768556734 passwords per hash
+
+Part 2
+Total time: 7034.77 seconds user time.
+Number of hashes computed: 8,246,083,822
+Passwords cracked: 300
+Time per hash computed: [seconds per hash]
+7034 / 8,246,083,822  = 8.53010975 x 10^-7
+Time per password cracked: [seconds per password]
+7034 / 300 = 23.4466666667 seconds per password.
+Passwords cracked per number of hashes computed: 300 /8,246,083,822 = 3.6380906 x 10 ^-8 passwords per hash
+
+===Part 3====
+Total time:693.99s 
+Number of hashes computed: 750,991,065
+Passwords cracked: 2805
+Time per hash computed: 700 / 750991065 = 9.3 x 10 ^-7 seconds per hash
+Time per password cracked: 700 / 2805 = 0.2495543672 seconds per password
+Passwords cracked per number of hashes computed: 2805/ 750991065 = 0.00000373506441119 passwords per hash
+
+
+====Analysis====
+	1.	The time taken to compute hashes is roughly the same (within 10%) for parts 1,2 and 3. This is the case since hashing is not getting harder, we’re just doing it a lot more. Thus, it scales linearly and we see a pretty consistent time for hashing. 
+ 
+	2.	Yes, it is much harder to crack salted and two word passwords and thus it requires more computational resources since we have to rehash many word combinations and word+salt combos. Part2 takes 234885 times more than part1 to crack a password. Part3 takes around 2500 times more than part1 to crack the passwords. This is because the double passwords require many combinations to get the right answer and we have to brute force it. For part3, there are only 2805~ salts to check, and so it only increases by that much. 
+
+	3.	Each hash is 32 bytes, each password is 16 bytes, and each entry would require another 32 bytes. Thus, each full entry would be 78 bytes. 
+For part1, we would require around 78 x 267733 bytes, or around 0.2 gigabytes.
+ For part2, there are a total of 267733^2 possible passwords. Thus, 267733^2 * 78 bytes. Ends up being around 5207 gigabytes.
+ For part3, there are a total of 267733 * 2805 possible passwords. Thus, 267733 * 2805 * 78 bytes. Ends up being around 54 gigabytes.
+
+4.
+If the database where the passwords are stored gets compromised, then the attacker will know everyone’s passwords unless they’re hashed.
+If you intercept a hash, you can’t necessarily try it at another website since you don’t know the base password.
+Database admins can’t view your passwords directly as they may be a bad actor.
+It’s also a lot more work to crack a password if they’re hashed.
