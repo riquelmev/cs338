@@ -1,6 +1,5 @@
-BRUTE-FORCE PASSWORD CRACKING
-Seth Romanenko
 Vicente Antonio Bobadilla Riquelme
+Seth Romanenko
 
 Part1
 Total Time: 0.28s User Time
